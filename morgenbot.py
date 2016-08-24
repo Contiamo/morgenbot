@@ -27,7 +27,7 @@ start_message = os.getenv('START_MESSAGE', 'What did you work on yesterday? What
 
 giphy = True if os.getenv('GIPHY', 'false').lower() == 'true' else False
 
-commands = ['standup','start','cancel','next','skip','table','left','ignore','heed','ignoring','help']
+commands = ['standup','start','cancel','next','skip','table','left','ignore','heed','ignoring','help', 'postpone']
 
 users = []
 topics = []
@@ -142,7 +142,17 @@ def next():
     else:
         current_user = users.pop()
         post_message('@%s, you\'re up' % current_user)
-        
+
+def postpone():
+    global users
+    global current_user
+
+    postponed_user = users.pop()
+    users.insert(0, postponed_user)
+    current_user = users.pop()
+    post_message('Ok, I\'ll ask again later. @%s, you\'re up' % current_user)
+
+
 def standup_time():
     if len(time) != 2: return
     seconds = (time[1] - time[0]).total_seconds()
@@ -327,6 +337,8 @@ def main():
         heed(args)
     elif command == 'ignoring':
         ignoring()
+    elif command == 'postpone':
+        postpone()
     elif command == 'help':
         help(args)
         
