@@ -148,7 +148,7 @@ def postpone():
     global users
     global current_user
 
-    postponed_user = users.pop()
+    postponed_user = current_user
     users.insert(0, postponed_user)
     current_user = users.pop()
     post_message('Ok, I\'ll ask again later. @%s, you\'re up' % current_user)
