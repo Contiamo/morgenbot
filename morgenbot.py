@@ -66,7 +66,8 @@ def init():
     topics = []
     time = []
     in_progress = True
-    post_message('%s, @channel! Please type !start when you are ready to stand up.' % init_greeting)
+    post_message('%s, @channel! Time for standup.' % init_greeting)
+    start()
 
 def start():
     global time
