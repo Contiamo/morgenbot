@@ -23,7 +23,6 @@ channel = os.getenv('CHANNEL', '#standup')
 ignore_users = os.getenv('IGNORE_USERS', '[]')
 
 init_greeting = os.getenv('INIT_GREETING', 'Good morning!')
-start_message = os.getenv('START_MESSAGE', 'What did you work on yesterday? What are you working on today? What, if any, are your blockers?')
 
 giphy = True if os.getenv('GIPHY', 'false').lower() == 'true' else False
 
@@ -76,7 +75,6 @@ def start():
         post_message('But we\'ve already started!')
         return
     time.append(datetime.datetime.now())
-    post_message('Let\'s get started! %s\nWhen you\'re done, please type !next' % start_message)
     next()
 
 def cancel():
