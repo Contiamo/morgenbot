@@ -26,7 +26,7 @@ init_greeting = os.getenv('INIT_GREETING', 'Good morning!')
 
 giphy = True if os.getenv('GIPHY', 'false').lower() == 'true' else False
 
-commands = ['standup','start','cancel','next','skip','table','left','ignore','heed','ignoring','help', 'postpone']
+commands = ['standup','start','cancel','next','skip','table','left','ignore','heed','ignoring','help', 'postpone', 'ping']
 
 users = []
 topics = []
@@ -159,7 +159,7 @@ def postpone():
 
 def ping():
     active_user = users[-1]
-    post_message('@%s, you\'re up' % active_user)
+    post_message('@%s, knock, knock....' % active_user)
 
 def standup_time():
     if len(time) != 2: return
