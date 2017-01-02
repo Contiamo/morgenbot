@@ -130,12 +130,6 @@ def standup_users():
     # don't forget to shuffle so we don't go in the same order every day!
     random.shuffle(active_users)
 
-    # <insert snarky comment here>
-    active_users.pop(active_users.index('tilmann'))
-    active_users.append('tilmann')
-    active_users.pop(active_users.index('michael'))
-    active_users.insert(0, 'michael')
-
     return active_users
 
 def next():
