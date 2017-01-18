@@ -127,7 +127,7 @@ def standup_users():
         is_present = slack.users.getPresence(user_id).body['presence'] == 'active'
         if is_present:
             standup_users.insert(0, user_id)
-        else
+        else:
             standup_users.append(user_id)
 
     for user_id in standup_users:
