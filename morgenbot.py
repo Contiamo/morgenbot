@@ -118,8 +118,17 @@ def standup_users():
             channel_id = one_channel['id']
 
     standup_room = slack.channels.info(channel_id).body['channel']
-    standup_users = standup_room['members']
+    unsorted_standup_users = standup_room['members']
+    standup_users = []
     active_users = []
+
+    # ensure that currently online users are at the beginning of the list
+    for user_id in unsorted_standup_users:
+        is_present = slack.users.getPresence(user_id).body['presence'] == 'active'
+        if is_present:
+            standup_users.insert(0, user_id)
+        else
+            standup_users.append(user_id)
 
     for user_id in standup_users:
         user_name = slack.users.info(user_id).body['user']['name']
