@@ -124,7 +124,7 @@ def standup_users():
 
     # ensure that currently online users are at the beginning of the list
     for user_id in unsorted_standup_users:
-        is_present = slack.users.getPresence(user_id).body['presence'] == 'active'
+        is_present = slack.users.get_presence(user_id).body['presence'] == 'active'
         if is_present:
             standup_users.insert(0, user_id)
         else:
