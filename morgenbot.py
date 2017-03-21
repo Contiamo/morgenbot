@@ -24,9 +24,9 @@ ignore_users = os.getenv('IGNORE_USERS', '[]')
 
 init_greeting = os.getenv('INIT_GREETING', 'Good morning!')
 
-giphy = True if os.getenv('GIPHY', 'false').lower() == 'true' else False
+giphy = False
 
-commands = ['standup','start','cancel','next','skip','table','left','ignore','heed','ignoring','help', 'postpone', 'ping']
+commands = ['standup','start','cancel','next','skip','table','left','ignore','heed','ignoring','help', 'postpone', 'ping', 'me']
 
 users = []
 topics = []
@@ -162,7 +162,19 @@ def postpone():
 
 def ping():
     active_user = users[-1]
-    post_message('@%s, knock, knock....' % active_user)
+    post_message('@%s, knock, knock...' % active_user)
+
+def me(user):
+    global users
+    global current_user
+
+    postponed_user = current_user
+    users.insert(0, postponed_user)
+    users.remove(user)
+
+    current_user = user
+    post_message('@%s, you\'re up' % current_user)
+
 
 def standup_time():
     if len(time) != 2: return
@@ -352,6 +364,10 @@ def main():
         postpone()
     elif command == 'help':
         help(args)
+    elif command == 'ping':
+        ping()
+    elif command == 'me':
+        me(msguser)
 
     return json.dumps({ })
 
